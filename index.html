@@ -25,6 +25,15 @@
   th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
   th{color:var(--gold);font-weight:normal;letter-spacing:.06em;font-size:12.5px}
   td.g{color:var(--blue)}td.s{color:var(--gold-hot)}td.gap{color:var(--warn)}
+  @media (max-width:700px){
+    table.cmp,table.cmp tbody,table.cmp tr,table.cmp td{display:block;width:100%}
+    table.cmp tr:first-child{display:none}
+    table.cmp tr{border:1px solid var(--line);border-radius:12px;margin:10px 0;padding:6px 10px;background:var(--card)}
+    table.cmp td{border:0;padding:4px 0}
+    table.cmp td:before{content:attr(data-l);display:block;font:11.5px Helvetica,sans-serif;letter-spacing:.14em;color:var(--gold);margin-top:6px}
+    table.cmp td:first-child{font-size:16px;color:var(--gold-hot)}
+    table.cmp td:first-child:before{display:none}
+  }
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:16px 0}
   .card.star{border-color:#6b5a22;box-shadow:0 0 0 1px #6b5a22 inset}
   .card .why{font-size:14.5px;color:var(--dim);margin:6px 0 10px}
@@ -60,7 +69,7 @@
 
 <h2>I · The two games, side by side</h2>
 <p>Counted from the code, not from memory: GvT is one 41 MB file at v18.84 after about 1,460 versions in twelve weeks; STARSPELL is v0.121.0 after about nine weeks. GvT is not "more polished", it is <b>wider</b>: more places to go, more things to own, more reasons to come back on a given night. That is the axis to push on.</p>
-<table>
+<table class="cmp">
 <tr><th>Category</th><th>Green vs Tan (v18.84)</th><th>STARSPELL (v0.121.0)</th><th>The gap</th></tr>
 <tr><td>Main campaign</td><td class="g">300 named levels in three roads (1–100, Elite 101–200, Overcharged co-op 201–300), 8 set-piece levels, ~40 scripted stages</td><td class="s">4 acts, 20 fights, one night; hard mode as a modifier; 12 birth signs give replay</td><td class="gap">one road vs three; no "what comes after the dawn"</td></tr>
 <tr><td>Side content</td><td class="g">5 adventure parks (~190 levels), 9 raids with easy/medium/hard/mega tiers, the Chess Set boss fight with a camera director</td><td class="s">Quick Play, Endless climb (level gate + weekly flags), Daily Hunt</td><td class="gap">no raids, no parks, no set-piece boss fights outside the campaign</td></tr>
@@ -134,6 +143,7 @@ const CARDS=[
  {id:'E2',sec:'dress',rec:'later',size:'M',name:'Tile sets and cast marks',what:'Alternate letter-tile faces (bone, brass, ice) and a cast trail (the Patron\'s Comet) that your rival sees in a duel. Earned by sign levels and events, never by power.',why:'Something to show a rival is the last missing reason to climb the sign ladder.',gvt:'GvT: saber colours, vehicle paint, pet coats.'},
  {id:'E3',sec:'dress',rec:'later',size:'M',name:'A companion — a small familiar on the meadow',what:'An owl, a fox-kit, a comet-moth: one small animated familiar that sits by the title, reacts to taps, and wears the event (a pumpkin lantern on Halloween). Earned at sign level 10, more later.',why:'GvT\'s 19 pets are the thing people screenshot. One familiar, well drawn, is the version this game\'s quiet dress can carry.',gvt:'GvT: 19 pets with coats and dyes.'}
 ];
+(function(){const t=document.querySelector('table.cmp');const hs=[...t.rows[0].cells].map(c=>c.textContent);for(const r of [...t.rows].slice(1))[...r.cells].forEach((c,i)=>c.setAttribute('data-l',hs[i]));})();
 const KEY='ssmore.v1';
 let st={};try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){};tally()};
